@@ -33,10 +33,13 @@ while(!feof($my_file)){
 
 fclose($my_file);
 
-if($validacion==true){
+
+if($validacion){
+    $_SESSION['sesionIniciada'] = 1;
     header("Location: ../componentes/index.php");
     exit;
 }else{
+    $_SESSION['sesionIniciada'] = 0;
     $_SESSION['mensajeError']="Las credenciales son incorrectas. Inténtelo de nuevo.";
     header('Location: ../componentes/login.php');
     exit;
