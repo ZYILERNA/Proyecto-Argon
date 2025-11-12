@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+if(isset($_SESSION['mensajeExito'])){
+    $mensajeExito = $_SESSION['mensajeExito'];
+    unset($_SESSION['mensajeExito']); 
+}
+
+if(isset($_SESSION['mensajeError'])){
+    $mensajeError = $_SESSION['mensajeError'];
+    unset($_SESSION['mensajeError']);
+}
+
 if (isset($_SESSION['usuario'])) {
     include("../include/hlogout.html");
 } else {
@@ -34,15 +44,40 @@ foreach ($lineas as $linea) {
 
 // --- Ejemplo: mostrar los productos ---
 foreach ($lista_productos as $p) {
-    echo "<div class='producto'style='display: flex;'>";
-    echo "<img src='{$p['imagen']}' alt='{$p['nombre']}' width='100px' height='100px'>";
-    echo "<h2>{$p['nombre']}</h2>";
-    echo "<p>Precio: {$p['precio']}</p>";
-    echo "<p>Stock: {$p['stock']}</p>";
-    echo "<p>{$p['descripcion']}</p>";
-    echo "<button>Agregar al carrito</button>";
-    echo "</div>";
+    ?>
+    <form action="../procedimientos/carrito.proc.php" method="post">
+        <?php
+            echo "<div class='producto'style='display: flex;'>";
+            echo "<img src='{$p['imagen']}' alt='{$p['nombre']}' width='100px' height='100px'>";
+            echo "<h2>{$p['nombre']}</h2>";
+            echo "<p>Precio: {$p['precio']}</p>";
+            echo "<p>Stock: {$p['stock']}</p>";
+            echo "<p>{$p['descripcion']}</p>";
+            /*Para enviar los datos por oculto */
+            echo "<input type='hidden' name='nombre' value='{$p['nombre']}'>";
+            echo "<input type='hidden' name='precio' value='{$p['precio']}'>";
+            echo "<input type='hidden' name='stock' value='{$p['stock']}'>";
+            echo "<input type='hidden' name='descripcion' value='{$p['descripcion']}'>";
+            echo "<input type='hidden' name='imagen' value='{$p['imagen']}'>";
+            /*-------------------------------- */
+            echo "<button type='submit'>Agregar al carrito</button>";
+            echo "</div>";
+        ?>
+    </form>
+    <?php
+    
 }
-
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
 <?php include '../include/footer.html'; ?>

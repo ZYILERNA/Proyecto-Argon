@@ -1,22 +1,38 @@
-<php
-$productos = '../productos/productos.txt';
+<?php
+session_start();
 
-$lineas = file($productos);
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+    // Recibe datos del formulario
+    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $precio = isset($_POST['precio']) ? $_POST['precio'] : '';
+    $stock = isset($_POST['stock']) ? $_POST['stock'] : '';
+    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
+    $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
+    
+    // Validar que los datos no estén vacíos
+    if($nombre != '' && $precio != ''){
+        
+        // Formato: id|nombre|precio|stock|descripcion|imagen
+        $linea = $nombre . '|' . $precio . '|' . $stock . '|' . $descripcion . '|' . $imagen . PHP_EOL;
+        
+        // Ruta del archivo
+        $archivo_carrito = "../productos/carrito.txt";
+        
+        // Guardar en el archivo 'a' para añadir
+        $file = fopen($archivo_carrito, "a") or die("No se pudo abrir el archivo");
+        fwrite($file, $linea);
+        fclose($file);
+        
 
-foreach ($lineas as $linea) {
-    $datos = explode('|', $linea);
-    $nombre = $datos[0];
-    $precio = $datos[1];
-    $stock = $datos[2];
-    $descripcion = $datos[3];
-    $imagen = $datos[4];
-    echo "<div class='producto'>";
-    echo "<img src='productos/$imagen' alt='$nombre'>";
-    echo "<h2>$nombre</h2>";
-    echo "<p>$precio</p>";
-    echo "<p>$stock</p>";
-    echo "<p>$descripcion</p>";
-    echo "</div>";
+        
+    }
+    // Redirigir de vuelta
+    header("Location: ../componentes/productos.php");
+    exit;
+    
+} else {
+    header("Location: ../componentes/index.php");
+    exit;
 }
-
 ?>
