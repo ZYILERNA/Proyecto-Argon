@@ -18,13 +18,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         // Ruta del archivo
         $archivo_carrito = "../productos/carrito.txt";
+        $archivo_reciente = "../productos/reciente.txt";
         
         // Guardar en el archivo 'a' para añadir
         $file = fopen($archivo_carrito, "a") or die("No se pudo abrir el archivo");
+        $file2 = fopen($archivo_reciente, "a") or die("No se pudo abrir el archivo");
         fwrite($file, $linea);
+        fwrite($file2, $linea);
         fclose($file);
-        
-
+        fclose($file2);
         
     }
     // Redirigir de vuelta
