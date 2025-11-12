@@ -4,3 +4,6 @@ Pera|0.60|15|Peras verdes de la casa de campesinos|../imagenes/pera.jpg
 Naranja|0.50|25|Naranjas de la casa de juan|../imagenes/naranja.jpg
 Mandarina|0.40|30| Mandarinas de la casa de juan|../imagenes/mandarina.jpg
 Piña|1.00|20| Piñas de la casa de juan|../imagenes/pina.jpg
+guayaba|12.00|1|guayabas|../imagenes/guayaba.jpg
+guayaba|12|1|guayaba|../imagenes/guayaba.jpg
+guayaba|21|1|1|../imagenes/guayaba.jpg

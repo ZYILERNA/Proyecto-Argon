@@ -102,6 +102,25 @@ foreach ($lineas as $linea) {
         padding: 15px;
     }
 
+.boton {
+    display: flex;             /* convierte el div en flex container */
+    justify-content: center;   /* centra horizontalmente */
+    margin-top: 20px;          /* separa del contenido anterior */
+}
+.boton button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.boton button:hover {
+    background-color: #218838;
+}
+
+
     .producto:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -184,6 +203,11 @@ foreach ($lista_productos as $p) {
 }
 ?>
 </div>
+
+<div class="boton">
+    <button type="button" onclick="location.href='../componentes/formulario.php'">Añadir</button>
+</div>
+
 
 <?php include '../include/footer.html'; ?>
 </body>
