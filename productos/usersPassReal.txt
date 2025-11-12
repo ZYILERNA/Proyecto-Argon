@@ -1,6 +1,6 @@
-usuario1;Pass2024secure
-usuario2;Marte789Quick
-usuario3;Ocean456Blue
-usuario4;Tiger2024Strong
-usuario5;Phoenix321Fire
-usuario6;Dragon654Power
+usuario1|Pass2024secure
+usuario2|Marte789Quick
+usuario3|Ocean456Blue
+usuario4|Tiger2024Strong
+usuario5|Phoenix321Fire
+usuario6|Dragon654Power

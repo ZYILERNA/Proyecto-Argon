@@ -1,9 +1,6 @@
 <?php
 session_start();
-
 session_unset();
-
-session_destroy();
-
-header("Location: ../componentes/login.php");
+header("Location: ../componentes/index.php"); 
+exit;
 ?>

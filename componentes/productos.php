@@ -1,5 +1,11 @@
 <?php
-include '../include/hlogin.html';
+session_start();
+
+if (isset($_SESSION['usuario'])) {
+    include("../include/hlogout.html");
+} else {
+    include("../include/hlogin.html");
+}
 
 $productos = '../productos/productos.txt';
 
@@ -37,4 +43,6 @@ foreach ($lista_productos as $p) {
     echo "<button>Agregar al carrito</button>";
     echo "</div>";
 }
+
 ?>
+<?php include '../include/footer.html'; ?>

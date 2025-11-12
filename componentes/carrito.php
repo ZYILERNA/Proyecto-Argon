@@ -1,4 +1,12 @@
-<?php include '../include/hlogin.html'; ?>
+<?php
+session_start();
+
+if (isset($_SESSION['usuario'])) {
+    include("../include/hlogout.html");
+} else {
+    include("../include/hlogin.html");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

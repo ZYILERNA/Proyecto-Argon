@@ -1,18 +1,12 @@
-<?php 
+<?php
+session_start();
 
-if(isset($_SESSION['mensajeError'])){
-    $error=$_SESSION['mensajeError'];
-}
-if(isset($_SESSION['sesionIniciada']=1)){
-    header("Location: hlogin.php");
-    exit;
+if (isset($_SESSION['usuario'])) {
+    include("../include/hlogout.html");
 } else {
-    header("Location: hlogout.php");
-    exit;
+    include("../include/hlogin.html");
 }
-
-
-include '../include/hlogin.html'; ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
