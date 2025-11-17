@@ -6,10 +6,10 @@ if (isset($_SESSION['usuario'])) {
 } else {
     include("../include/hlogin.html");
 }
+$usuario = basename($_SESSION['usuario']);
 
-$carritos = '../productos/reciente.txt';
+$carritos = "../productos/reciente_" . $usuario . ".txt";
 
-// Leer todas las líneas del archivo (si existe)
 if (file_exists($carritos)) {
     $lineas = file($carritos, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 } else {
@@ -18,22 +18,17 @@ if (file_exists($carritos)) {
 
 $lista_carrito = [];
 
-// Leer y agrupar productos por nombre
 foreach ($lineas as $linea) {
     $datos = explode('|', $linea);
     $nombre = trim($datos[0]);
 
-    // Si ya está en el carrito, sumamos cantidad
-    if (isset($lista_carrito[$nombre])) {
-        $lista_carrito[$nombre];
-    } else {
+    if (!isset($lista_carrito[$nombre])) {
         $lista_carrito[$nombre] = [
             'nombre' => $nombre,
             'precio' => trim($datos[1]),
             'stock' => trim($datos[2]),
             'descripcion' => trim($datos[3]),
             'imagen' => trim($datos[4]),
-            'cantidad' => 1,
         ];
     }
 }
@@ -44,113 +39,92 @@ foreach ($lineas as $linea) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visto Recientemente</title>
+<title>Visto Recientemente - La Huerta Fresca</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        padding: 20px;
+        min-height: 100vh;
     }
 
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-
-    .contenedor-carrito {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .producto {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        width: 260px;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: transform 0.2s ease;
-    }
-
-    .producto:hover {
-        transform: translateY(-5px);
-    }
-
-    .producto img {
-        width: 100%;
-        height: 180px;
-        border-radius: 8px;
-        object-fit: cover;
-    }
-
-    .producto h2 {
-        font-size: 18px;
-        margin: 10px 0 5px 0;
-        color: #333;
-        text-align: center;
-    }
-
-    .producto p {
-        font-size: 14px;
-        color: #555;
-        margin: 4px 0;
-        text-align: center;
-    }
-
-    .cantidad {
-        background: #e9ecef;
-        padding: 5px 10px;
-        border-radius: 6px;
-        font-weight: bold;
-        margin-top: 5px;
-    }
-
-    .boton-eliminar {
-        background: #dc3545;
+    .hero-section {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
         color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 6px;
-        margin-top: 10px;
-        cursor: pointer;
-        transition: background 0.2s ease;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .boton-eliminar:hover {
-        background: #c82333;
+    .product-card {
+        transition: transform 0.3s ease;
+        border: none;
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .product-img {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
     }
 </style>
+<?php  include '../include/color_fondo.php'?>
 </head>
 <body>
 
-<h1>🛒 Visto Recientemente</h1>
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-clock-history"></i> Visto Recientemente
+        </h1>
+        <p class="lead">Productos que has consultado recientemente</p>
+    </div>
+</div>
 
-<div class="contenedor-carrito">
-<?php
-if (empty($lista_carrito)) {
-    echo "<p style='text-align:center; width:100%; font-size:18px;'>Tu carrito está vacío.</p>";
-} else {
-    foreach ($lista_carrito as $p) {
-        echo "<div class='producto'>";
-        echo "<img src='{$p['imagen']}' alt='{$p['nombre']}'>";
-        echo "<h2>{$p['nombre']}</h2>";
-        echo "<p><strong>Precio:</strong> {$p['precio']}</p>";
-        echo "<p><strong>Stock:</strong> {$p['stock']}</p>";
-        echo "<p>{$p['descripcion']}</p>";
-        echo "<p class='cantidad'>Cantidad: {$p['cantidad']}</p>";
-        echo "<form action='../funciones/eliminar.php' method='post'>
-            <input type='hidden' name='nombre' value='{$p['nombre']}'>
-        </form>";
-        echo "</div>";
-    }
-}
-?>
+<div class="container mb-5">
+    <?php if (empty($lista_carrito)): ?>
+        <div class="text-center py-5">
+            <i class="bi bi-eye-slash" style="font-size: 5rem; color: #ccc;"></i>
+            <h2 class="mt-4 text-muted">No has visto productos recientemente</h2>
+            <a href="../componentes/productos.php" class="btn btn-success btn-lg mt-3">
+                <i class="bi bi-basket3"></i> Ver Productos
+            </a>
+        </div>
+    <?php else: ?>
+        <div class="row g-4">
+            <?php foreach ($lista_carrito as $p): ?>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="card product-card">
+                        <img src="<?php echo htmlspecialchars($p['imagen']); ?>" 
+                             class="product-img" 
+                             alt="<?php echo htmlspecialchars($p['nombre']); ?>">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold"><?php echo htmlspecialchars($p['nombre']); ?></h5>
+                            <p class="card-text text-muted small"><?php echo htmlspecialchars($p['descripcion']); ?></p>
+                            <p class="h5 text-success"><?php echo htmlspecialchars($p['precio']); ?></p>
+                            <span class="badge bg-success">Stock: <?php echo htmlspecialchars($p['stock']); ?></span>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>
 
 <?php include '../include/footer.html'; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -42,175 +42,173 @@ foreach ($lineas as $linea) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo de Productos</title>
+<title>Catálogo de Productos - La Huerta Fresca</title>
 
-<?php include '../include/color_fondo.php'; ?>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    h1 {
-        text-align: center;
-        color: #333;
+    .hero-section {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    /* Mensajes */
-    .mensaje {
-        text-align: center;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .exito {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-
-    .error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-
-    /* Contenedor general */
-    .contenedor-productos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    /* Tarjeta de producto */
-    .producto {
-        background-color: rgba(255, 255, 255, 0.9);
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        width: 240px;
+    .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        background: white;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
+        height: 100%;
     }
 
-    .boton {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    
-    .boton button {
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    .boton button:hover {
-        background-color: #218838;
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
-    .producto:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    .producto img {
-        border-radius: 8px;
-        width: 100%;
-        height: 180px;
+    .product-img {
+        height: 250px;
         object-fit: cover;
+        border-bottom: 3px solid #4CAF50;
     }
 
-    .producto h2 {
-        font-size: 18px;
-        margin: 10px 0 5px 0;
-        color: #333;
-        text-align: center;
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4CAF50;
     }
 
-    .producto p {
-        margin: 3px 0;
-        font-size: 14px;
-        color: #555;
-        text-align: center;
-    }
-
-    .producto button {
-        margin-top: 10px;
-        padding: 8px 12px;
-        background-color: #007bff;
-        color: white;
+    .btn-add-cart {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
         border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.2s ease;
+        border-radius: 25px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
     }
 
-    .producto button:hover {
-        background-color: #0056b3;
+    .btn-add-cart:hover {
+        background: linear-gradient(135deg, #45a049, #388e3c);
+        transform: scale(1.05);
+    }
+
+    .stock-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(76, 175, 80, 0.9);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    .btn-add-product {
+        background: linear-gradient(135deg, #FF9800, #F57C00);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-add-product:hover {
+        background: linear-gradient(135deg, #F57C00, #E65100);
+        transform: scale(1.05);
     }
 </style>
+<?php  include '../include/color_fondo.php'?>
 </head>
 <body>
 
-<h1>Catálogo de Productos</h1>
-
-<!-- Mostrar mensajes si existen -->
-<?php if (isset($mensajeExito)): ?>
-    <div class="mensaje exito"><?php echo htmlspecialchars($mensajeExito); ?></div>
-<?php endif; ?>
-
-<?php if (isset($mensajeError)): ?>
-    <div class="mensaje error"><?php echo htmlspecialchars($mensajeError); ?></div>
-<?php endif; ?>
-
-<!-- Contenedor de productos -->
-<div class="contenedor-productos">
-<?php
-foreach ($lista_productos as $p) {
-?>
-    <form action="../procedimientos/carrito.proc.php" method="post">
-        <div class="producto">
-            <img src="<?php echo $p['imagen']; ?>" alt="<?php echo $p['nombre']; ?>">
-            <h2><?php echo $p['nombre']; ?></h2>
-            <p><strong>Precio:</strong> <?php echo $p['precio']; ?></p>
-            <p><strong>Stock:</strong> <?php echo $p['stock']; ?></p>
-            <p><?php echo $p['descripcion']; ?></p>
-
-            <!-- Campos ocultos -->
-            <input type="hidden" name="nombre" value="<?php echo $p['nombre']; ?>">
-            <input type="hidden" name="precio" value="<?php echo $p['precio']; ?>">
-            <input type="hidden" name="stock" value="<?php echo $p['stock']; ?>">
-            <input type="hidden" name="descripcion" value="<?php echo $p['descripcion']; ?>">
-            <input type="hidden" name="imagen" value="<?php echo $p['imagen']; ?>">
-
-            <button type="submit">Agregar al carrito 🛒</button>
-        </div>
-    </form>
-<?php
-}
-?>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-basket3-fill"></i> Nuestros Productos Frescos
+        </h1>
+        <p class="lead">Frutas y verduras de la mejor calidad, directamente del campo</p>
+    </div>
 </div>
 
-<div class="boton">
-    <button type="button" onclick="location.href='../componentes/formulario.php'">Añadir Producto</button>
+<div class="container mb-5">
+    <!-- Mostrar mensajes si existen -->
+    <?php if (isset($mensajeExito)): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> <?php echo htmlspecialchars($mensajeExito); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($mensajeError)): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> <?php echo htmlspecialchars($mensajeError); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
+    <!-- Grid de productos -->
+    <div class="row g-4 mb-4">
+        <?php foreach ($lista_productos as $p): ?>
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <form action="../procedimientos/carrito.proc.php" method="post">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="<?php echo htmlspecialchars($p['imagen']); ?>" 
+                                 class="card-img-top product-img" 
+                                 alt="<?php echo htmlspecialchars($p['nombre']); ?>">
+                            <span class="stock-badge">
+                                <i class="bi bi-box-seam"></i> Stock: <?php echo htmlspecialchars($p['stock']); ?>
+                            </span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold mb-2"><?php echo htmlspecialchars($p['nombre']); ?></h5>
+                            <p class="card-text text-muted small mb-3">
+                                <?php echo htmlspecialchars($p['descripcion']); ?>
+                            </p>
+                            <p class="product-price mb-3">
+                                <?php echo htmlspecialchars($p['precio']); ?>
+                            </p>
+
+                            <!-- Campos ocultos -->
+                            <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($p['nombre']); ?>">
+                            <input type="hidden" name="precio" value="<?php echo htmlspecialchars($p['precio']); ?>">
+                            <input type="hidden" name="stock" value="<?php echo htmlspecialchars($p['stock']); ?>">
+                            <input type="hidden" name="descripcion" value="<?php echo htmlspecialchars($p['descripcion']); ?>">
+                            <input type="hidden" name="imagen" value="<?php echo htmlspecialchars($p['imagen']); ?>">
+
+                            <button type="submit" class="btn btn-success btn-add-cart w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Botón añadir producto -->
+    <div class="text-center mt-5">
+        <a href="../componentes/formulario.php" class="btn btn-warning btn-add-product">
+            <i class="bi bi-plus-circle-fill"></i> Añadir Nuevo Producto
+        </a>
+    </div>
 </div>
 
 <?php include '../include/footer.html'; ?>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

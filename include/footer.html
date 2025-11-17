@@ -3,127 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sticky Footer La Huerta Fresca</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  main {
-    flex: 1; /* Hace que el contenido empuje el footer hacia abajo */
-    padding: 2rem;
-    background-color: #f8f9fa;
-  }
+main {
+  flex: 1;
+}
 
-  footer {
-    background-color: #212529;
-    color: white;
-    padding: 3rem 1rem 1rem;
-    margin-top: auto;
-  }
+.footer-custom {
+  background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+  color: #ffffff;         
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+}
 
-  footer a {
-    color: #adb5bd;
-    text-decoration: none;
-  }
+.footer-custom h3,
+.footer-custom h4 {
+  color: #4CAF50;         
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  footer a:hover {
-    text-decoration: underline;
-  }
+.footer-custom a {
+  color: #ffffff;         
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-  .footer-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
+.footer-custom a:hover {
+  color: #4CAF50;          
+}
 
-  .footer-bottom {
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid #495057;
-    text-align: center;
-  }
+.footer-custom .list-unstyled li {
+  margin-bottom: 0.5rem;
+}
 
-  .footer h3, .footer h4 {
-    margin-bottom: 1rem;
-  }
+.footer-bottom {
+  border-top: 1px solid #495057;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: #ffffff;         
+}
 
-  .footer p, .footer li {
-    color: #adb5bd;
-    line-height: 1.6;
-  }
+.social-icons a {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: #ffffff;         
+  transition: all 0.3s ease;
+}
 
-  .footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+.social-icons a:hover {
+  color: #4CAF50;         
+  transform: translateY(-3px);
+}
 
-  .footer li {
-    margin-bottom: 0.5rem;
-  }
+.footer-custom .text-success { color: #4CAF50 !important; }
+.footer-custom .text-danger  { color: #dc3545 !important; }
+.footer-custom .text-muted   { color: #bfc6cd !important; }
 </style>
 </head>
 <body>
 
-<main>
-  
-</main>
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Columna 1 -->
+      <div class="col-md-3">
+        <h3><i class="bi bi-basket3-fill"></i> La Huerta Fresca</h3>
+        <p class="text-muted">Tu frutería de confianza desde 2004. Productos frescos y naturales directo del campo.</p>
+        <div class="social-icons mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter"></i></a>
+        </div>
+      </div>
 
-<footer class="footer">
-  <div class="footer-grid">
-    <!-- Columna 1 -->
-    <div>
-      <h3>La Huerta Fresca</h3>
-      <p>Tu frutería de confianza desde 2004</p>
+      <!-- Columna 2 -->
+      <div class="col-md-3">
+        <h4>Enlaces Rápidos</h4>
+        <ul class="list-unstyled">
+          <li><a href="../componentes/index.php"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+          <li><a href="../componentes/productos.php"><i class="bi bi-chevron-right"></i> Productos</a></li>
+          <li><a href="../componentes/carrito.php"><i class="bi bi-chevron-right"></i> Carrito</a></li>
+          <li><a href="../procedimientos/logout.proc.php"><i class="bi bi-chevron-right"></i> Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3 -->
+      <div class="col-md-3">
+        <h4>Contacto</h4>
+        <ul class="list-unstyled text-muted">
+          <li><i class="bi bi-envelope-fill text-success"></i> info@lahuertafresca.com</li>
+          <li><i class="bi bi-telephone-fill text-success"></i> +34 912 345 678</li>
+          <li><i class="bi bi-geo-alt-fill text-success"></i> Calle del Mercado, 123</li>
+          <li><i class="bi bi-pin-map-fill text-success"></i> Barcelona, España</li>
+        </ul>
+      </div>
+
+      <!-- Columna 4 -->
+      <div class="col-md-3">
+        <h4>Horario</h4>
+        <ul class="list-unstyled text-muted">
+          <li><i class="bi bi-clock-fill text-success"></i> Lunes a Viernes</li>
+          <li>8:00 - 20:00</li>
+          <li class="mt-2"><i class="bi bi-clock-fill text-success"></i> Sábados</li>
+          <li>9:00 - 14:00</li>
+          <li class="mt-2"><i class="bi bi-clock-fill text-danger"></i> Domingos</li>
+          <li>Cerrado</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Columna 2 -->
-    <div>
-      <h4>Enlaces</h4>
-      <ul>
-        <li><a href="../componentes/index.php">Inicio</a></li>
-        <li><a href="../componentes/productos.php">Productos</a></li>
-        <li><a href="../componentes/carrito.php">Carrito</a></li>
-        <li><a href="../procedimientos/logout.proc.php">Logout</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p class="mb-0">
+        <i class="bi bi-c-circle"></i> 2025 La Huerta Fresca. Todos los derechos reservados.
+      </p>
     </div>
-
-    <!-- Columna 3 -->
-    <div>
-      <h4>Contacto</h4>
-      <ul>
-        <li><a>info@lahuertafresca.com</a></li>
-        <li><a>+34 912 345 678</a></li>
-        <li><a>Calle del Mercado, 123</a></li>
-        <li><a>Barcelona, España</a></li>
-      </ul>
-    </div>
-
-    <!-- Columna 4 -->
-    <div>
-      <h4>Horario</h4>
-      <p>Lunes a Viernes: 8:00 - 20:00</p>
-      <p>Sábados: 9:00 - 14:00</p>
-      <p>Domingos: Cerrado</p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2025 La Huerta Fresca. Todos los derechos reservados.</p>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

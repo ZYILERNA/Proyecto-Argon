@@ -1,0 +1,2 @@
+Platano|0.75|20|Platanos amarillas de la casa de pepe|../imagenes/platano.jpg
+Pera|0.60|15|Peras verdes de la casa de campesinos|../imagenes/pera.jpg

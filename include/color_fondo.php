@@ -1,7 +1,6 @@
 <?php
-// Obtener el color de fondo de la cookie (si existe)
-$color_fondo = isset($_COOKIE['color_fondo']) ? $_COOKIE['color_fondo'] : '#FFFFFF';
-$nombre_usuario = isset($_COOKIE['nombre_usuario']) ? $_COOKIE['nombre_usuario'] : '';
+$color = $_COOKIE['color_fondo'] ?? '#ffffff'; // color por defecto
+echo "<style>body { background-color: $color !important; }</style>";
 ?>
 
 <style>

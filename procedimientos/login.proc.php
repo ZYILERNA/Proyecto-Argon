@@ -44,10 +44,10 @@ if ($validado) {
     // Guardamos la sesión
     $_SESSION['usuario'] = $usuario;
     
-    // Crear cookie con el color del usuario (válida por 30 días)
+    // Crear cookie con el color del usuario (válida por 30 segundos)
     $color_usuario = $colores_usuarios[$usuario] ?? '#FFFFFF'; // Color por defecto blanco
-    setcookie('color_fondo', $color_usuario, time() + (86400 * 30), '/'); // 30 días
-    setcookie('nombre_usuario', $usuario, time() + (86400 * 30), '/');
+    setcookie('color_fondo', $color_usuario, time() + (30), '/'); // 30 segundos
+    setcookie('nombre_usuario', $usuario, time() + (30), '/');
     
     header("Location: ../componentes/index.php");
     exit;

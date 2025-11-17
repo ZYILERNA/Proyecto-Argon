@@ -1,16 +1,92 @@
-<header style="background-color: #f8f9fa; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-    <nav style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <a href="../componentes/index.php" style="font-size: 1.5rem; font-weight: bold; color: #007bff; text-decoration: none;">La Huerta Fresca</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .navbar-custom {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-custom .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        .navbar-custom .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+        .navbar-custom .nav-link:hover {
+            transform: translateY(-2px);
+            opacity: 0.8;
+        }
+        .btn-nav {
+            background: white;
+            color: #4CAF50;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            color: #45a049;
+        }
+        .btn-logout {
+            background: #f44336;
+            color: white;
+        }
+        .btn-logout:hover {
+            background: #d32f2f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="../componentes/index.php">
+            <i class="bi bi-basket3-fill"></i> La Huerta Fresca
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../componentes/index.php">
+                        <i class="bi bi-house-fill"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../componentes/productos.php">
+                        <i class="bi bi-basket2-fill"></i> Productos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../componentes/reciente.php">
+                        <i class="bi bi-clock-history"></i> Reciente
+                    </a>
+                </li>
+            </ul>
+            <div class="d-flex flex-wrap align-items-center">
+                <a href="../componentes/carrito.php" class="btn btn-nav me-2">
+                    <i class="bi bi-cart-fill"></i> Carrito
+                </a>
+                <a href="../procedimientos/logout.proc.php" class="btn btn-nav btn-logout">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
         </div>
-        <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
-            <li><a href="../componentes/index.php" style="color: #333; text-decoration: none;">Inicio</a></li>
-            <li><a href="../componentes/productos.php" style="color: #333; text-decoration: none;">Productos</a></li>
-            <li><a href="../componentes/reciente.php" style="color: #333; text-decoration: none;">Reciente</a></li>
-        </ul>
-        <div style="display: flex; gap: 1rem;">
-            <a href="../procedimientos/logout.proc.php" style="padding: 0.5rem 1rem; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Logout</a>
-            <a href="../componentes/carrito.php" style="padding: 0.5rem 1rem; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Carrito</a>
-        </div>
-    </nav>
-</header>
+    </div>
+</nav>
+</body>
+</html>
