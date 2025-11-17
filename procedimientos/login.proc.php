@@ -6,36 +6,34 @@ if (isset($_SESSION['usuario'])) {
     exit;
 }
 
-//Recogemos los valores del formulario rellenado en login.html
+// Recogemos los valores del formulario
 $usuario = $_POST['nombre'] ?? '';
 $clave = $_POST['clave'] ?? '';
 $clave_md5 = md5($clave);
 
-/** echo "Clave desde el formulario: $clave<br/>";
-*echo "Clave encriptada: $clave_md5<br/>";
-*/
+// Colores únicos para cada usuario
+$colores_usuarios = [
+    'usuario1' => '#FFE5E5', // Rosa claro
+    'usuario2' => '#E5F0FF', // Azul claro
+    'usuario3' => '#E5FFE5', // Verde claro
+    'usuario4' => '#FFF5E5', // Naranja claro
+    'usuario5' => '#F0E5FF', // Púrpura claro
+    'usuario6' => '#FFFFE5', // Amarillo claro
+];
 
-
-
-
-//Recogemos en variable el archivo que tiene el usuario y clave
+// Recogemos el archivo de usuarios
 $sresu = '../productos/sresu.txt';
-//En caso de que no exista dicho archivo
-if (!file_exists ($sresu)) {
+
+if (!file_exists($sresu)) {
     die('Error: No se encuentra el archivo');
 }
-//El método file lee un archivo y añade su contenido en un array
-$lineas = file($sresu, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+$lineas = file($sresu, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 $validado = false;
 
 foreach ($lineas as $linea) {
-    //Separamos el usuario de la clave con el método explode, entre " " el elemento que separe ambos en el archivo txt. Con el trim eliminamos espacios en blanco 
     list($user, $pass) = explode('|', trim($linea));
-    echo "Fichero:<br/>";
-    echo "Usuario: $user<br/>";
-    echo "Passrord: $pass<br/>";
-    //Validamos si lo introducido es igual a lo que tenemos en el archivo
+    
     if ($usuario === $user && $clave_md5 === $pass) {
         $validado = true;
         break;
@@ -43,12 +41,18 @@ foreach ($lineas as $linea) {
 }
 
 if ($validado) {
-    $_SESSION['usuario'] = $usuario; // Guardamos la sesión
+    // Guardamos la sesión
+    $_SESSION['usuario'] = $usuario;
+    
+    // Crear cookie con el color del usuario (válida por 30 días)
+    $color_usuario = $colores_usuarios[$usuario] ?? '#FFFFFF'; // Color por defecto blanco
+    setcookie('color_fondo', $color_usuario, time() + (86400 * 30), '/'); // 30 días
+    setcookie('nombre_usuario', $usuario, time() + (86400 * 30), '/');
+    
     header("Location: ../componentes/index.php");
     exit;
 } else {
     header("Location: ../componentes/error.php");
     exit;
 }
-
 ?>
