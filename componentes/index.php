@@ -9,28 +9,28 @@ if (isset($_SESSION['usuario'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>INDEX</title>
+    <title>La Huerta Fresca - Inicio</title>
+    
+    <?php include '../include/color_fondo.php'; ?>
 </head>
 <body>
     <section class="hero">
-        
         <h1>Frutas y Verduras Frescas</h1>
         <p>Directo del campo a tu mesa. Calidad y frescura garantizada.</p>
-        <?php
-        if (isset($_SESSION['usuario'])) {
-            ?><a href="productos.php" class="btn">Ver Productos</a><?php
-        } else {
-            ?>  
-                <a href="login.php" class="btn">Inicia Sesión</a>
-            <?php
-        }
-        ?>
         
+        <?php if (isset($_SESSION['usuario'])): ?>
+            <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px;">
+                👋 Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!
+            </p>
+            <a href="productos.php" class="btn">Ver Productos</a>
+        <?php else: ?>
+            <a href="login.php" class="btn">Inicia Sesión</a>
+        <?php endif; ?>
     </section>
 
     <!-- Features -->
@@ -52,7 +52,7 @@ if (isset($_SESSION['usuario'])) {
             <p>Seleccionamos cada producto con cuidado y dedicación</p>
         </div>
     </section>
+    
+    <?php include '../include/footer.html'; ?>
 </body>
 </html>
-
-<?php include '../include/footer.html'; ?>

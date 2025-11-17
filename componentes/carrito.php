@@ -6,8 +6,9 @@ if (isset($_SESSION['usuario'])) {
 } else {
     include("../include/hlogin.html");
 }
+$usuario = basename($_SESSION['usuario']);
 
-$carritos = '../productos/carrito.txt';
+$carritos = "../productos/carrito_" . $usuario . ".txt";
 
 // Leer todas las líneas del archivo (si existe)
 if (file_exists($carritos)) {

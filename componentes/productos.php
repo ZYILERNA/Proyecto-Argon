@@ -43,10 +43,12 @@ foreach ($lineas as $linea) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo de Productos</title>
+
+<?php include '../include/color_fondo.php'; ?>
+
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
         margin: 0;
         padding: 20px;
     }
@@ -90,7 +92,7 @@ foreach ($lineas as $linea) {
 
     /* Tarjeta de producto */
     .producto {
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.9);
         border: 1px solid #ddd;
         border-radius: 12px;
         width: 240px;
@@ -102,24 +104,25 @@ foreach ($lineas as $linea) {
         padding: 15px;
     }
 
-.boton {
-    display: flex;             /* convierte el div en flex container */
-    justify-content: center;   /* centra horizontalmente */
-    margin-top: 20px;          /* separa del contenido anterior */
-}
-.boton button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-.boton button:hover {
-    background-color: #218838;
-}
-
+    .boton {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .boton button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .boton button:hover {
+        background-color: #218838;
+    }
 
     .producto:hover {
         transform: translateY(-5px);
@@ -205,9 +208,8 @@ foreach ($lista_productos as $p) {
 </div>
 
 <div class="boton">
-    <button type="button" onclick="location.href='../componentes/formulario.php'">Añadir</button>
+    <button type="button" onclick="location.href='../componentes/formulario.php'">Añadir Producto</button>
 </div>
-
 
 <?php include '../include/footer.html'; ?>
 </body>
