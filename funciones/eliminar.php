@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-$archivo_carrito = '../productos/carrito.txt';
+$usuario = basename($_SESSION['usuario']);
+
+$archivo_carrito = "../productos/carrito_" . $usuario . ".txt";
+
 $nombreProd = trim($_REQUEST['nombre']);
 
 // Leer el archivo

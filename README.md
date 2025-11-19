@@ -38,13 +38,13 @@ Contraseña: Pass2024secure
 ## 📸 Screenshots
 
 ### Página Principal
-![Home](![alt text](/imagenes/image.png))
+![Home](/imagenes/image.png)
 
 ### Catálogo de Productos
-![Productos](![alt text](/imagenes/productos.png))
+![Productos](/imagenes/productos.png)
 
 ### Carrito de Compras
-![Carrito](![alt text](/imagenes/carrito.png))
+![Carrito](/imagenes/carrito.png)
 
 ---
 
